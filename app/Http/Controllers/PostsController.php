@@ -56,7 +56,11 @@ class PostsController extends Controller
    */
   public function store(Request $request)
   {
-    $data = $request->only(['title', 'body', 'is_published']);
+    $data = $request->validate([
+      'title' => 'required|string|max:50|unique:posts',
+      'body' => ['required', 'string'],
+      'is_published' => 'sometimes|integer'
+    ]);
 
     // $newPost = new Post;
     // $newPost->title = $data['title'];
