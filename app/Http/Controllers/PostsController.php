@@ -14,9 +14,11 @@ class PostsController extends Controller
    */
   public function index()
   {
-    $posts = Post::where('is_published', 1)->orderBy('title', 'asc')->get();
+    $publishedPosts = Post::published()->orderBy('title', 'asc')->get();
+    // $posts = Post::where('is_published', 1)->orderBy('title', 'asc')->get();
+    // $unpublishedPosts = Post::unpublished()->get();
     // select + from posts where is_published = 1 order by name asc;
-    return view('posts', ['posts' => $posts]);
+    return view('posts', ['posts' => $publishedPosts]);
   }
 
   /**
