@@ -45,7 +45,7 @@ class PostsController extends Controller
    */
   public function create()
   {
-    //
+    return view('posts.create');
   }
 
   /**
@@ -56,7 +56,20 @@ class PostsController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $data = $request->only(['title', 'body', 'is_published']);
+
+    // $newPost = new Post;
+    // $newPost->title = $data['title'];
+    // $newPost->body = $data['body'];
+    // $newPost->is_published = $request->get('is_published', false);
+
+    // $newPost->save();
+
+    $newPost = Post::create($data);
+    // insert into posts (title, body, is_published)
+    // values ($data['title'], $data['body'], $data['is_published'])
+
+    return $this->index();
   }
 
   /**

@@ -15,5 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/posts', 'PostsController@index');
 
+Route::get('/posts/create', 'PostsController@create')
+  ->name('createPostForm');
+
+Route::post('/posts', 'PostsController@store');
+
 Route::get('/posts/{id}', 'PostsController@dajMiJedanPost')
   ->name('singlePost');
