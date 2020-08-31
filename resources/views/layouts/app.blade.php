@@ -1,16 +1,11 @@
 <html>
   <head>
     <title>@yield('title')</title>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/app.css')}}">
   </head>
   <body>
-
-    <div>
-      <span>About us</span>
-      <span>Log in</span>
+    <div class="container">
+      @yield('content')
     </div>
-
-    @yield('content')
-
-    @yield('footer')
   </body>
 </html>
