@@ -18,7 +18,7 @@ class PostsController extends Controller
     // $posts = Post::where('is_published', 1)->orderBy('title', 'asc')->get();
     // $unpublishedPosts = Post::unpublished()->get();
     // select + from posts where is_published = 1 order by name asc;
-    return view('posts', ['posts' => $publishedPosts]);
+    return view('posts.all', ['posts' => $publishedPosts]);
   }
 
   /**
@@ -32,7 +32,7 @@ class PostsController extends Controller
     // select * from posts where id=$id;
     $post = Post::findOrFail($id);
 
-    return view('post', [
+    return view('posts.single', [
       'title' => $post->title,
       'body' => $post->body
     ]);
