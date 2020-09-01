@@ -10,7 +10,7 @@
 
   <form method="POST" action="/posts">
     @csrf
-    @if ($errors->any())
+    {{-- @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -18,25 +18,21 @@
             @endforeach
         </ul>
     </div>
-    @endif
+    @endif --}}
     <div class="form-group">
       <label for="title">Title</label>
-      <input class="form-control " id="title" name="title">
-      @if($errors->first('title'))
-        <div class="alert alert-danger">
-          {{$errors->first('title')}}
-        </div>
-      @endif
+      <input class="form-control @error('title') is-invalid @enderror" id="title" name="title">
+      @error('title')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
 
     <div class="form-group">
       <label for="body">Body</label>
-      <textarea class="form-control" id="body" rows="3" name="body"></textarea>
-      @if($errors->first('body'))
-        <div class="alert alert-danger">
-          {{$errors->first('body')}}
-        </div>
-      @endif
+      <textarea class="form-control @error('body') is-invalid @enderror" id="body" rows="3" name="body"></textarea>
+      @error('body')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
 
     <div class="form-group form-check">
