@@ -41,6 +41,7 @@ class PostsController extends Controller
     // select * from comments where post_id= $id
 
     return view('posts.single', [
+      'id' => $post->id,
       'title' => $post->title,
       'body' => $post->body,
       'comments' => $post->comments
@@ -65,7 +66,7 @@ class PostsController extends Controller
    */
   public function store(CreatePostRequest $request)
   {
-    $data = $request->validate();
+    $data = $request->validated();
 
     // $newPost = new Post;
     // $newPost->title = $data['title'];
@@ -74,11 +75,11 @@ class PostsController extends Controller
 
     // $newPost->save();
 
-    $newPost = Post::create($data);
+    Post::create($data);
     // insert into posts (title, body, is_published)
     // values ($data['title'], $data['body'], $data['is_published'])
 
-    return $this->index();
+    return redirect('/posts');
   }
 
   /**
