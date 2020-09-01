@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreatePostRequest;
 use Illuminate\Http\Request;
 use App\Post;
+use App\Comment;
 
 class PostsController extends Controller
 {
@@ -28,14 +29,17 @@ class PostsController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function dajMiJedanPost($id)
+  public function show($id)
   {
     // select * from posts where id=$id;
     $post = Post::findOrFail($id);
+    // $comments = Comment::where('post_id', $id)->get();
+    // select * from comments where post_id= $id
 
     return view('posts.single', [
       'title' => $post->title,
-      'body' => $post->body
+      'body' => $post->body,
+      'comments' => $post->comments
     ]);
   }
 

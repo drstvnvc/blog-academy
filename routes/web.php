@@ -20,5 +20,5 @@ Route::get('/posts/create', 'PostsController@create')
 
 Route::post('/posts', 'PostsController@store');
 
-Route::get('/posts/{id}', 'PostsController@dajMiJedanPost')
+Route::get('/posts/{id}', 'PostsController@show')
   ->name('singlePost');

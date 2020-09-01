@@ -20,4 +20,8 @@ class Post extends Model
   {
     return random_int(1, 10);
   }
+
+  public function comments() {
+    return $this->hasMany(Comment::class);
+  }
 }
