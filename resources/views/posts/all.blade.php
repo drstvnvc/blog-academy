@@ -9,7 +9,7 @@
   </a>
   @foreach ($posts as $post)
     <div>
-      <a href="{{route('singlePost', ['id' => $post->id])}}"  >{{$post->title}}</a>
+      <a href="{{route('singlePost', ['id' => $post->id])}}">{{$post->title}} ({{$post->comments->count()}})</a>
     </div>
   @endforeach
 @endsection
