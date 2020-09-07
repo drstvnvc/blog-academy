@@ -24,3 +24,7 @@ Route::get('/posts/{id}', 'PostsController@show')
   ->name('singlePost');
 
   Route::post('/posts/{id}/comments', 'CommentsController@store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
