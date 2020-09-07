@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreatePostRequest;
 use Illuminate\Http\Request;
 use App\Post;
-use App\Comment;
 
 class PostsController extends Controller
 {
@@ -79,9 +78,11 @@ class PostsController extends Controller
 
     // $newPost->save();
 
-    Post::create($data);
-    // insert into posts (title, body, is_published)
-    // values ($data['title'], $data['body'], $data['is_published'])
+    auth()->user()->posts()->create($data);
+    // automatski ugra]uje user_id polje koristeći posts relaciju koju smo dodali u klasu user
+
+    // insert into posts (title, body, is_published, user?id)
+    // values ($data['title'], $data['body'], $data['is_published'], auth()->user()->id)
 
     return redirect('/posts');
   }
