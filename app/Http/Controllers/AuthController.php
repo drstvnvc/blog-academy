@@ -15,6 +15,10 @@ class AuthController extends Controller
     return view('register');
   }
 
+  public function getLoginForm() {
+    return view('login');
+  }
+
   public function register(RegisterRequest $request)
   {
     $data = $request->validated();
@@ -28,5 +32,17 @@ class AuthController extends Controller
     auth()->login($user);
 
     return redirect('/posts');
+  }
+
+  public function login(Request $request) {
+    $credentials = [
+      'email' => $request->get('email'),
+      'password' => $request->get('password')
+    ];
+    if (auth()->attempt($credentials)) {
+      return redirect('/posts');
+    }
+
+    return view('login', ['loginFailed' => true]);
   }
 }
