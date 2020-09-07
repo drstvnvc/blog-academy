@@ -13,18 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/posts', 'PostsController@index');
+Route::group(['middleware' => 'auth'], function() {
+  Route::get('/posts', 'PostsController@index')->name('home');
 
-Route::get('/posts/create', 'PostsController@create')
-  ->name('createPostForm');
+  Route::get('/posts/create', 'PostsController@create')
+    ->name('createPostForm');
 
-Route::post('/posts', 'PostsController@store');
+  Route::post('/posts', 'PostsController@store');
 
-Route::get('/posts/{id}', 'PostsController@show')
-  ->name('singlePost');
+  Route::get('/posts/{id}', 'PostsController@show')
+    ->name('singlePost');
 
   Route::post('/posts/{id}/comments', 'CommentsController@store');
 
-Auth::routes();
+  Route::get('/home', 'HomeController@index');
 
-Route::get('/home', 'HomeController@index')->name('home');
+  Route::get('/', function () {
+    return redirect('/posts');
+  });
+});
+
+Auth::routes();
