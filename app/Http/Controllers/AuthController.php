@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 use App\Http\Requests\RegisterRequest;
 use App\User;
@@ -21,7 +22,7 @@ class AuthController extends Controller
     $user = User::create([
       'name' => $data['name'],
       'email' => $data['email'],
-      'password' => $data['password']
+      'password' => Hash::make($data['password']) // bcrypt($data['password'])
     ]);
 
     auth()->login($user);
