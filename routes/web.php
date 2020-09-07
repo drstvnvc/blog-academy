@@ -25,14 +25,16 @@ Route::get('/posts/{id}', 'PostsController@show')
 
 Route::post('/posts/{id}/comments', 'CommentsController@store');
 
-Route::get('/register', 'AuthController@getRegisterForm')->name('register');
-Route::post('/users', 'AuthController@register');
-
-Route::get('/login', 'AuthController@getLoginForm')->name('login');
-Route::post('/login', 'AuthController@login');
-
 Route::post('/logout', 'AuthController@logout')->name('logout');
 
 Route::get('/', function () {
   return redirect('/posts');
+});
+
+Route::group(['middleware' => 'guest'], function () {
+  Route::get('/register', 'AuthController@getRegisterForm')->name('register');
+  Route::post('/users', 'AuthController@register');
+
+  Route::get('/login', 'AuthController@getLoginForm')->name('login');
+  Route::post('/login', 'AuthController@login');
 });
