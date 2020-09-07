@@ -30,3 +30,9 @@ Route::post('/users', 'AuthController@register');
 
 Route::get('/login', 'AuthController@getLoginForm')->name('login');
 Route::post('/login', 'AuthController@login');
+
+Route::post('/logout', 'AuthController@logout')->name('logout');
+
+Route::get('/', function () {
+  return redirect('/posts');
+});

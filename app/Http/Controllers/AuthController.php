@@ -45,4 +45,9 @@ class AuthController extends Controller
 
     return view('login', ['loginFailed' => true]);
   }
+
+  public function logout() {
+    auth()->logout();
+    return redirect('/');
+  }
 }
