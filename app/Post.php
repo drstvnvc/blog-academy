@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-  protected $fillable = ['title', 'body', 'is_published'];
+  protected $fillable = ['title', 'body', 'is_published', 'user_id'];
 
-  public static function published() {
+  public static function published()
+  {
     return self::where('is_published', 1);
   }
 
-  public static function unpublished() {
+  public static function unpublished()
+  {
     return self::where('is_published', 0);
   }
 
@@ -21,7 +23,13 @@ class Post extends Model
     return random_int(1, 10);
   }
 
-  public function comments() {
+  public function comments()
+  {
     return $this->hasMany(Comment::class);
+  }
+
+  public function author()
+  {
+    return $this->belongsTo(User::class, 'user_id');
   }
 }
