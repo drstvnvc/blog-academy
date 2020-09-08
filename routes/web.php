@@ -13,22 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/posts', 'PostsController@index');
+Route::group(['middleware' => 'auth'], function () {
+  Route::get('/posts', 'PostsController@index');
+  Route::get('/posts/create', 'PostsController@create')
+    ->name('createPostForm');
+  Route::post('/posts', 'PostsController@store');
+  Route::get('/posts/{id}', 'PostsController@show')
+    ->name('singlePost');
+  Route::post('/posts/{id}/comments', 'CommentsController@store');
 
-Route::get('/posts/create', 'PostsController@create')
-  ->name('createPostForm');
+  Route::post('/logout', 'AuthController@logout')->name('logout');
 
-Route::post('/posts', 'PostsController@store');
+  Route::get('users/{id}', 'UsersController@show');
 
-Route::get('/posts/{id}', 'PostsController@show')
-  ->name('singlePost');
-
-Route::post('/posts/{id}/comments', 'CommentsController@store');
-
-Route::post('/logout', 'AuthController@logout')->name('logout');
-
-Route::get('/', function () {
-  return redirect('/posts');
+  Route::get('/', function () {
+    return redirect('/posts');
+  });
 });
 
 Route::group(['middleware' => 'guest'], function () {

@@ -1,19 +1,22 @@
 @extends('layouts.app')
-@section('title', $title)
+@section('title', $post->title)
 
 @section('content')
-  <h1>{{$title}}</h1>
-  <p>{{$body}}</p>
+  <h1>{{$post->title}}</h1>
+  <a href="/users/{{$post->author->id}}">
+    <h4>{{$post->author->name}}</h4>
+  </a>
+  <p>{{$post->body}}</p>
   <hr />
   <div>
     <h3>Comments</h3>
-    @foreach($comments as $comment)
+    @foreach($post->comments as $comment)
       <div class="alert alert-primary">
         {{$comment->body}}
       </div>
     @endforeach
     <div>
-      <form method="POST" action="/posts/{{$id}}/comments">
+      <form method="POST" action="/posts/{{$post->id}}/comments">
         @csrf
         <div class="form-group">
           <input class="form-control @error('comment') is-invalid @enderror" id="comment" name="comment" placeholder="Comment..."/>

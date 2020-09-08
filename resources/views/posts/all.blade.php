@@ -6,7 +6,13 @@
   <h1>My posts</h1>
   @foreach ($posts as $post)
     <div>
-      <a href="{{route('singlePost', ['id' => $post->id])}}">{{$post->title}} ({{$post->comments->count()}})</a>
+      <a href="{{route('singlePost', ['id' => $post->id])}}">
+        {{$post->title}}
+      </a>
+      -
+      <a href="/users/{{$post->author->id}}">
+        {{$post->author->name}}
+      </a>
     </div>
   @endforeach
 @endsection

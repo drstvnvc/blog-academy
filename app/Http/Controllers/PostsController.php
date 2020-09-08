@@ -44,10 +44,12 @@ class PostsController extends Controller
     // select * from comments where post_id= $id
 
     return view('posts.single', [
-      'id' => $post->id,
-      'title' => $post->title,
-      'body' => $post->body,
-      'comments' => $post->comments
+      'post' => $post,
+      // 'id' => $post->id,
+      // 'title' => $post->title,
+      // 'body' => $post->body,
+      // 'comments' => $post->comments,
+      // 'author' => $post->author
     ]);
   }
 

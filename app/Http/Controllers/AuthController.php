@@ -39,6 +39,8 @@ class AuthController extends Controller
       'email' => $request->get('email'),
       'password' => $request->get('password')
     ];
+    // $user = User::where('email', $email)->first();
+    // if ($user && $user->password == $password) { // provjera passworda preko hasha
     if (auth()->attempt($credentials)) {
       return redirect('/posts');
     }
