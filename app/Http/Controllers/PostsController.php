@@ -20,7 +20,7 @@ class PostsController extends Controller
   public function index()
   {
     $publishedPosts = Post::published()
-      ->with('comments')
+      ->with('comments', 'author')
       ->orderBy('title', 'asc')
       ->get();
 
