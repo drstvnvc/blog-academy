@@ -6,6 +6,14 @@
   <a href="/users/{{$post->author->id}}">
     <h4>{{$post->author->name}}</h4>
   </a>
+  <h4>Tags</h4>
+  <ul>
+    @foreach ($post->tags as $tag)
+      <li>{{$tag->name}}</li>
+    @endforeach
+  </ul>
+  <hr />
+
   <p>{{$post->body}}</p>
   <hr />
   <div>

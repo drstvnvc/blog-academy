@@ -40,6 +40,14 @@
       <label class="form-check-label" for="is_published">I want to publish the post</label>
     </div>
 
+    <h4>Tags</h4>
+    @foreach ($tags as $tag)
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="tag_{{$tag->id}}" name="tags[]" value="{{$tag->id}}">
+        <label class="form-check-label" for="tag_{{$tag->id}}">{{$tag->name}}</label>
+      </div>
+    @endforeach
+
     <button type="submit" class="btn btn-primary">Submit</button>
 
   </form>

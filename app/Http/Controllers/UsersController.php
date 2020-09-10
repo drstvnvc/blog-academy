@@ -12,7 +12,7 @@ class UsersController extends Controller
       info($query->sql);
     });
 
-    $user = User::with('publishedPosts')->findOrFail($id);
+    $user = User::with('publishedPosts.comments')->findOrFail($id);
 
     return view('users.single', compact('user'));
   }

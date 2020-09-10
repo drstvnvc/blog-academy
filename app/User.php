@@ -42,6 +42,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Post::class);
     }
 
+    public function unpublishedPosts() {
+      return $this->hasMany(Post::class)->where('is_published', 0);
+    }
+
     public function publishedPosts() {
       return $this->posts()->where('is_published', 1);
     }

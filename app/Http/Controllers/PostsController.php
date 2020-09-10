@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreatePostRequest;
 use Illuminate\Http\Request;
 use App\Post;
+use App\Tag;
 
 class PostsController extends Controller
 {
@@ -39,7 +40,7 @@ class PostsController extends Controller
   public function show($id)
   {
     // select * from posts where id=$id;
-    $post = Post::findOrFail($id);
+    $post = Post::with('tags')->findOrFail($id);
     // $comments = Comment::where('post_id', $id)->get();
     // select * from comments where post_id= $id
 
@@ -60,7 +61,8 @@ class PostsController extends Controller
    */
   public function create()
   {
-    return view('posts.create');
+    $tags = Tag::all();
+    return view('posts.create', ['tags' => $tags]);
   }
 
   /**
@@ -80,7 +82,8 @@ class PostsController extends Controller
 
     // $newPost->save();
 
-    auth()->user()->posts()->create($data);
+    $post = auth()->user()->posts()->create($data);
+    $post->tags()->attach($data['tags']);
     // automatski ugra]uje user_id polje koristeći posts relaciju koju smo dodali u klasu user
 
     // insert into posts (title, body, is_published, user?id)

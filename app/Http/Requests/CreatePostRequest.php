@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\NoBadWords;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreatePostRequest extends FormRequest
@@ -25,8 +26,10 @@ class CreatePostRequest extends FormRequest
   {
     return [
       'title' => 'required|string|max:50|unique:posts',
-      'body' => ['required', 'string'],
-      'is_published' => 'sometimes|integer'
+      'body' => ['required', 'string', new NoBadWords],
+      'is_published' => 'sometimes|integer',
+      'tags' => 'sometimes|array',
+      'tags.*' => 'sometimes|exists:tags,id'
     ];
   }
 }
