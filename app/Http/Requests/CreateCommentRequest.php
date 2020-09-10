@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\NoBadWords;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateCommentRequest extends FormRequest
@@ -24,7 +25,7 @@ class CreateCommentRequest extends FormRequest
     public function rules()
     {
         return [
-          'comment' => 'required|string|max:300'
+          'comment' => ['required', 'string', 'max:300', new NoBadWords]
         ];
     }
 }
