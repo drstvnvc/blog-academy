@@ -15,4 +15,8 @@
       </a>
     </div>
   @endforeach
+
+  {{ $posts->links() }}
+  <br />
+  {{ $posts->links('posts.custom-pagination', ['posts' => $posts]) }}
 @endsection

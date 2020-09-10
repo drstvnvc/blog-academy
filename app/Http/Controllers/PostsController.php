@@ -22,7 +22,7 @@ class PostsController extends Controller
     $publishedPosts = Post::published()
       ->with('comments', 'author')
       ->orderBy('title', 'asc')
-      ->get();
+      ->paginate(17);
 
     // $posts = Post::where('is_published', 1)->orderBy('title', 'asc')->get();
     // $unpublishedPosts = Post::unpublished()->get();
