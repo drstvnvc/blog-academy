@@ -33,9 +33,15 @@ class Post extends Model
     return $this->belongsTo(User::class, 'user_id');
   }
 
-  public function createComment($comment) {
+  public function createComment($comment)
+  {
     return $this->comments()->create([
       'body' => $comment
     ]);
+  }
+
+  public function tags()
+  {
+    return $this->belongsToMany(Tag::class, 'post_tags');
   }
 }
