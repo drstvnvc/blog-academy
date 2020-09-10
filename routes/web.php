@@ -38,3 +38,8 @@ Route::group(['middleware' => 'guest'], function () {
   Route::get('/login', 'AuthController@getLoginForm')->name('login');
   Route::post('/login', 'AuthController@login');
 });
+
+Route::get('/account-verification/{id}', 'AuthController@verifyUser');
+Route::get('/test-verified', function() {
+  return 'jeste verifikovan';
+})->middleware('verified');
